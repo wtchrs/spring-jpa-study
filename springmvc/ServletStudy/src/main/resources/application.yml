@@ -1,0 +1,13 @@
+spring:
+  devtools:
+    restart.enabled: true
+    livereload.enabled: true
+  mvc.view:
+    # for InternalResourceViewResolver
+    prefix: /WEB-INF/views/
+    suffix: .jsp
+
+logging:
+  level:
+    root: info
+    org.apache.coyote.http11: debug
