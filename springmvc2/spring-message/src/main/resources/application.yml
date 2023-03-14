@@ -1,0 +1,14 @@
+spring:
+  devtools:
+    restart.enabled: true
+    livereload.enabled: true
+  messages:
+    basename: messages
+
+server:
+  error:
+    include-stacktrace: never
+
+logging:
+  level:
+    root: info
