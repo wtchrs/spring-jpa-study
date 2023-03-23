@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+        .field-error {
+            color: #dc3545;
+        }
+        .field-error-border {
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2 th:text="#{page.updateItem}">Item Update</h2>
+    </div>
+    <form th:object="${item}" method="post">
+        <p th:if="${errors?.containsKey('global')}" th:text="#{${errors['global']}}" class="field-error"></p>
+        <div>
+            <label th:for="id" th:text="#{label.item.id}">Item ID</label>
+            <input type="text" th:field="*{id}" class="form-control" readonly>
+        </div>
+        <div>
+            <label th:for="itemName" th:text="#{label.item.itemName}">Item Name</label>
+            <p th:if="${errors?.containsKey('itemName')}" th:text="#{${errors['itemName']}}" class="field-error"></p>
+            <input type="text" th:field="*{itemName}" th:placeholder="#{placeholder.item.itemName}"
+                   class="form-control" th:classappend="${errors?.containsKey('itemName')} ? 'field-error-border'">
+        </div>
+        <div>
+            <label th:for="price" th:text="#{label.item.price}">Price</label>
+            <p th:if="${errors?.containsKey('price')}" th:text="#{${errors['price']}}" class="field-error"></p>
+            <input type="text" th:field="*{price}" th:placeholder="#{placeholder.item.price}"
+                   class="form-control" th:classappend="${errors?.containsKey('price')} ? 'field-error-border'">
+        </div>
+        <div>
+            <label th:for="quantity" th:text="#{label.item.quantity}">Quantity</label>
+            <p th:if="${errors?.containsKey('quantity')}" th:text="#{${errors['quantity']}}" class="field-error"></p>
+            <input type="text" th:field="*{quantity}" th:placeholder="#{placeholder.item.quantity}"
+                   class="form-control" th:classappend="${errors?.containsKey('quantity')} ? 'field-error-border'">
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg" type="submit" th:text="#{button.save}">Save</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        th:onclick="|location.href='@{../{id} (id=${item.id})}'|"
+                        type="button" th:text="#{button.cancel}">Cancel
+                </button>
+            </div>
+        </div>
+    </form>
+</div> <!-- /container -->
+</body>
+</html>

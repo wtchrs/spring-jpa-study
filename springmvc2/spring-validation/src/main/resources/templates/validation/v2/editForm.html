@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+        .field-error {
+            color: #dc3545;
+        }
+        .field-error-border {
+            border-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="py-5 text-center">
+        <h2 th:text="#{page.updateItem}">Item Update</h2>
+    </div>
+    <form th:object="${itemParam}" method="post">
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="error : ${#fields.globalErrors()}" th:text="${error}" class="field-error">Global error</p>
+        </div>
+        <div>
+            <label th:for="id" th:text="#{label.item.id}">Item ID</label>
+            <input type="text" th:field="*{id}" class="form-control" readonly>
+        </div>
+        <div>
+            <label th:for="itemName" th:text="#{label.item.itemName}">Item Name</label>
+            <input type="text" th:field="*{itemName}" th:placeholder="#{placeholder.item.itemName}"
+                   class="form-control" th:errorclass="field-error-border">
+            <p class="field-error" th:errors="*{itemName}"></p>
+        </div>
+        <div>
+            <label th:for="price" th:text="#{label.item.price}">Price</label>
+            <input type="text" th:field="*{price}" th:placeholder="#{placeholder.item.price}"
+                   class="form-control" th:errorclass="field-error-border">
+            <p class="field-error" th:errors="*{price}"></p>
+        </div>
+        <div>
+            <label th:for="quantity" th:text="#{label.item.quantity}">Quantity</label>
+            <input type="text" th:field="*{quantity}" th:placeholder="#{placeholder.item.quantity}"
+                   class="form-control" th:errorclass="field-error-border">
+            <p class="field-error" th:errors="*{quantity}"></p>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="row">
+            <div class="col">
+                <button class="w-100 btn btn-primary btn-lg" type="submit" th:text="#{button.save}">Save</button>
+            </div>
+            <div class="col">
+                <button class="w-100 btn btn-secondary btn-lg"
+                        th:onclick="|location.href='@{../{id} (id=${itemParam.id})}'|"
+                        type="button" th:text="#{button.cancel}">Cancel
+                </button>
+            </div>
+        </div>
+    </form>
+</div> <!-- /container -->
+</body>
+</html>
