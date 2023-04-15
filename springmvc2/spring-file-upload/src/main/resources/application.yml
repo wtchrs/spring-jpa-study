@@ -1,0 +1,12 @@
+file:
+  dir: C:/temp-dir/file-upload/
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 50MB
+
+logging:
+  level:
+    org.apache.coyote.http11: info
